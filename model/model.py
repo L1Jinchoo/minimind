@@ -531,7 +531,7 @@ class MokioMindBlock(nn.Module):
         return hidden_states, present_key_value
 
 
-class MokioMindModel(nn.Module):
+class GenMindModel(nn.Module):
     def __init__(self, config: GenMindConfig):
         super().__init__()
         self.config = config
@@ -619,7 +619,7 @@ class GenMindForCausalLM(PreTrainedModel, GenerationMixin):
 
     def __init__(self, config: GenMindConfig):
         super().__init__(config)
-        self.model = MokioMindModel(config)
+        self.model = GenMindModel(config)
         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
         self.model.embed_tokens.weight = self.lm_head.weight
 
